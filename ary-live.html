@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>ARY Digital Live</title>
+  <style> body { margin: 0; } </style>
+</head>
+<body>
+  <video id="aryPlayer" controls width="100%" height="auto"></video>
+  <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+  <script>
+    const video = document.getElementById('aryPlayer');
+    const videoSrc = 'http://ams2.jadoo.tv/ECpull/arydigital.stream/playlist.m3u8';
+
+    if (Hls.isSupported()) {
+      const hls = new Hls();
+      hls.loadSource(videoSrc);
+      hls.attachMedia(video);
+      hls.on(Hls.Events.MANIFEST_PARSED, () => video.play());
+    } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+      video.src = videoSrc;
+    } else {
+      video.outerHTML = '<p>Your browser cannot play HLS streams.</p>';
+    }
+  </script>
+</body>
+</html>
