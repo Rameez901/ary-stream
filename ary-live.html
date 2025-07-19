@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>ARY Digital Live</title>
+  </head>
+  <body style="margin:0">
+    <video id="aryPlayer" width="100%" height="auto" controls></video>
+
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+    <script>
+      const video = document.getElementById('aryPlayer');
+      const videoSrc = 'https://cdn07isb.tamashaweb.com:8087/tamashatest/84M/playlist.m3u8';
+
+      if (Hls.isSupported()) {
+        const hls = new Hls();
+        hls.loadSource(videoSrc);
+        hls.attachMedia(video);
+      } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+        video.src = videoSrc;
+      }
+    </script>
+  </body>
+</html>
